@@ -18,5 +18,8 @@
   "homepage": "https://github.com/wlowrimore/vandy-bc-team-profile-generator-2022#readme",
   "devDependencies": {
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.0"
   }
 }
