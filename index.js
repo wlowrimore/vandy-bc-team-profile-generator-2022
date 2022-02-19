@@ -1,20 +1,21 @@
-const inquirer = require('inquirer');
-// const fs = require('fs');
-// const util = require('util');
-// const generateSite = require('./src/generateSite.js');
-// const writeFileAsync = util.promisify(fs.writeFile);
+// Include packages needed for this application
+const generateHTML = require('./src/generateHTML');
 
-const Manager = require('./lib/Manager.js');
-const Engineer = require('./lib/Engineer.js');
-const Intern = require('./lib/Intern.js');
-const myTeam = [];
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+
+const fs = require('fs');
+const inquirer = require('inquirer');
+
+const teamArray = [];
 
 // Creates an array of questions for the Manager Input.
-const promptManager = () => {
+const addManager = () => {
   return inquirer.prompt([
     {
       type: 'input',
-      name: 'Name',
+      name: 'name',
       message: "What is the Manager's full name? (Required)",
       validate: nameInput => {
         if (nameInput) {
@@ -28,10 +29,10 @@ const promptManager = () => {
 
     {
       type: 'input',
-      name: 'Employee_Id',
+      name: 'id',
       message: "What is the Manager's employee ID number? (Required)",
-      validate: employeeId => {
-        if (employeeId) {
+      validate: id => {
+        if (id) {
           return true;
         } else {
           console.log('You must enter employee ID number of the Manager!');
@@ -56,75 +57,59 @@ const promptManager = () => {
 
     {
       type: 'input',
-      name: 'Office_Number',
-      message: "What is the Manager's Office number?",
+      name: 'officeNumber',
+      message: "What is the Manager's office number? (Required)",
       validate: officeNumber => {
         if (officeNumber) {
           return true;
         } else {
-          console.log('You must enter the office number of the Manager!');
+          console.log("You must enter the Manager's office number!");
         }
       }
     },
-
-  ]).then(answers => {
-      console.log(answers);
-      const manager = new Manager(answers.name, answers.employeeId, answers.email, answers.officeNumber);
-      myTeam.push(manager);
-      promptAddPosition();
-    })   
+  ])
+  .then(managerInput => {
+      const {name, id, email, officeNumber} = managerInput;
+      const manager = new Manager(name, id, email, officeNumber);
+      teamArray.push(manager);
+      console.log(manager);
+  }) 
+    
 };
 
-const promptAddPosition = () => {
+const addEmployee = () => {
   return inquirer.prompt([
     {
       type: 'list',
-      name: 'position',
-      message: 'Please select which position you would like to add',
-      choices: ["Engineer", "Intern", "None"]
-    }
+      name: 'role',
+      message: "What position would you like to add?",
+      choices: ["Engineer", "Intern"]
+    },
 
-  ]).then(choices => {
-      switch (choices.position) {
-        case 'Engineer':
-          promptEngineer();
-          break;
-        case 'Intern':
-          promptIntern();
-          break;
-        default: console.log("!!!! I'M FINISHED !!!!");
-      }
-    })
-};
-  
-  
-    
-
-// Creates an Array for Engineer Input
-const promptEngineer = () => {
-  return inquirer.prompt([
     {
       type: 'input',
-      name: 'Engineer_Name',
-      message: "Pleas enter Engineer's full name. (Required)",
-      validate: engineerName => {
-        if (engineerName) {
+      name: 'name',
+      message: "What is the employee's full name? (Required)",
+      validate: nameInput => {
+        if (nameInput) {
           return true;
         } else {
-          console.log('You must enter the full name of the Engineer!');
+          console.log("You must enter the employee's full name!");
+          return false;
         }
       }
     },
 
     {
       type: 'input',
-      name: 'Employee_ID',
-      message: 'What is the employee ID of the Engineer? (Required)',
-      validate: employeeId => {
-        if (employeeId) {
+      name: 'id',
+      message: "What is the employee's ID number? (Required)",
+      validate: idInput => {
+        if (idInput) {
           return true;
         } else {
-          console.log('You must enter the employee ID!');
+          console.log("You must enter the employees ID number!");
+          return false;
         }
       }
     },
@@ -132,12 +117,13 @@ const promptEngineer = () => {
     {
       type: 'input',
       name: 'email',
-      message: 'What is the email address of the Engineer? (Required)',
-      validate: email => {
-        if (email) {
+      message: "What is the employee's email address? (Required)",
+      validate: emailInput => {
+        if (emailInput) {
           return true;
         } else {
-          console.log('You must enter the email of the Engineer!');
+          console.log("You must enter the employee's email address!");
+          return false;
         }
       }
     },
@@ -145,86 +131,83 @@ const promptEngineer = () => {
     {
       type: 'input',
       name: 'github',
-      message: 'What is your GitHub username?',
-      validate: github => {
-        if (github) {
+      message: "What is the Engineer's GitHub username? (Required)",
+      when: (input) => input.role === "Engineer",
+      validate: githubInput => {
+        if (githubInput) {
           return true;
         } else {
-          console.log('You must enter the GitHub username of the Engineer!');
+          console.log("You must enter the Engineer's GitHub username!");
+          return false;
         }
       }
-    }
+    },
 
-  ]).then(answers => {
-      console.log(answers);
-      const engineer = new Engineer(answers.name, answers.employeeId, answers.email, answers.github);
-      myTeam.push(engineer);
-      promptAddPosition();
-    })   
+    {
+      type: 'input',
+      name: 'school',
+      message: "What is the name of the Intern's school? (Required)",
+      when: (input) => input.role === "Intern",
+      validate: schoolInput => {
+        if (schoolInput) {
+          return true;
+        } else {
+          console.log("You must enter the name of the Intern's school!");
+        }
+      }
+    },
+    {
+      type: 'confirm',
+      name: 'confirmAddEmployee',
+      message: "Would you like to add any other positions?",
+      default: false
+    }  
+    
+  ])
+  .then(employeeData => {
+    let {name, id, email, role, github, school, confirmAddEmployee} = employeeData;
+    let employee;
+
+    if (role === "Engineer") {
+      employee = new Engineer(name, id, email, github);
+      console.log(employee);
+        
+    } else if 
+        (role === "Intern") {
+        employee = new Intern(name, id, email, school);
+        console.log(employee);
+    
+        teamArray.push(employee);
+
+        if (confirmAddEmployee) {
+          return addEmployee(teamArray);
+
+        } else { 
+          return teamArray;
+        }
+    }
+  })  
+}
+const writeFile = employeeCards => {
+  fs.writeFile('dist/index.html', employeeCards, err => {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      console.log("Success!...You can find your newly created index.html file in your '/dist/' folder.");
+    }
+  })
 };
 
-
-// Creates an array of Intern Input
-const promptIntern = () => {
-  return inquirer.prompt ([
-    {
-      type: 'input',
-      name: 'Intern_Name',
-      message: "Pleas enter Intern's full name. (Required)",
-      validate: internName => {
-        if (internName) {
-          return true;
-        } else {
-          console.log('You must enter the full name of the Intern!');
-        }
-      }
-    },
-
-    {
-      type: 'input',
-      name: 'Employee_ID',
-      message: 'What is the employee ID of the Intern? (Required)',
-      validate: employeeId => {
-        if (employeeId) {
-          return true;
-        } else {
-          console.log('You must enter the employee ID of the Intern!');
-        }
-      }
-    },
-
-    {
-      type: 'input',
-      name: 'email',
-      message: 'What is the email address of the Intern? (Required)',
-      validate: email => {
-        if (email) {
-          return true;
-        } else {
-          console.log('You must enter the email of the Intern!');
-        }
-      }
-    },
-
-    {
-      type: 'input',
-      name: 'School',
-      message: 'What is the name of the school the Intern is attending?',
-      validate: school => {
-        if (school) {
-          return true;
-        } else {
-          console.log('You must enter the name of the school the Intern is attending!');
-        }
-      }
-    }
-
-  ]).then(answers => {
-      console.log(answers);
-      const intern = new Intern(answers.name, answers.employeeId, answers.email, answers.school);
-      myTeam.push(intern);
-      promptAddPosition();
-    })
-};
-
-promptManager(); 
+// Function to initialize app
+addManager()
+  .then(addEmployee)
+  .then(teamArray => {
+    return generateHTML(teamArray);
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .catch(err => {
+    console.log(err)
+  });
