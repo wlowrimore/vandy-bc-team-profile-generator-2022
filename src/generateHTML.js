@@ -2,10 +2,10 @@ const generateManager = function (manager) {
     // create Manager card
     return `
     <div class="col-4 mt-4">
-        <div class="card h-100">
-            <div class="card-header bg-primary">
+        <div class="card h-100 card-shadow">
+            <div class="card-header" style="background-color: #323d5a;">
                 <h3>${manager.name}</h3>
-                <h4>Manager</h4><i class="material-icons">content_paste</i>
+                <h4>Manager</h4><i class="material-icons">supervisor_account</i>
             </div>
             <div class="card-body">
                 <p class="id">ID: ${manager.id}</p>
@@ -21,15 +21,15 @@ const generateManager = function (manager) {
 const generateEngineer = function (engineer) {
     return `
     <div class="col-4 mt-4">
-        <div class="card h-100">
-            <div class="card-header bg-primary">
+        <div class="card h-100 card-shadow">
+            <div class="card-header" style= "background-color: #323d5a;">
                 <h3>${engineer.name}</h3>
-                <h4>Engineer</h4><i class="material-icons">laptop_mac</i>
+                <h4>Engineer</h4><i class="material-icons">laptop</i>
             </div>
             <div class="card-body">
                 <p class="id">ID: ${engineer.id}</p>
                 <p class="email">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></p>
-                <p class="github">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></p>
+                <p class="github">Github: <a href="https://github.com/${engineer.github}" target= "_blank" rel= "noreferrer">www.github.com/${engineer.github}</a></p>
             </div>
         </div>
     </div>
@@ -40,14 +40,14 @@ const generateEngineer = function (engineer) {
 const generateIntern = function (intern) {
     return `
     <div class="col-4 mt-4">
-        <div class="card h-100">
-            <div class="card-header bg-primary">
+        <div class="card h-100 card-shadow">
+            <div class="card-header" style="background-color: #323d5a">
                 <h3>${intern.name}</h3>
-                <h4>Intern</h4><i class="material-icons">assignment_ind</i>
+                <h4>Intern</h4><i class="material-icons">school</i>
             </div>
             <div class="card-body">
                 <p class="id">ID: ${intern.id}</p>
-                <p class="email">Email:<a href="mailto:${intern.email}">${intern.email}</a></p>
+                <p class="email">Email: <a href="mailto:${intern.email}">${intern.email}</a></p>
                 <p class="school">School: ${intern.school}</p>
             </div>
         </div>
@@ -57,11 +57,12 @@ const generateIntern = function (intern) {
 
 generateHTML = (data) => {
 
-    pageArray = [];
+    // array for cards 
+    pageArray = []; 
 
-    for (let i = 0; i < pageArray.length; i++) {
-        const employee = pageArray[i];
-        const role = employee.getRole();
+    for (let i = 0; i < data.length; i++) {
+        const employee = data[i];
+        const role = employee.getRole(); 
 
 
         // call manager function
@@ -89,14 +90,15 @@ generateHTML = (data) => {
     // joining strings 
     const employeeCards = pageArray.join('')
 
-    const generateTeam = generateTeamPage(employeeCards);
+    // return to generated page
+    const generateTeam = generateTeamPage(employeeCards); 
     return generateTeam;
 
 }
 
 // Generate HTML Page
 const generateTeamPage = function (employeeCards) {
-    return `
+    return`
 
     <!DOCTYPE html>
     <html lang="en">
@@ -113,7 +115,7 @@ const generateTeamPage = function (employeeCards) {
     <body>
         <header>
             <nav class="navbar" id="navbar">
-                <span class="navbar-brand bg-danger mb-0 h1 w-100 text-center text-light" id="navbar-text">My Team</span>
+                <span class="navbar-brand mb-0 h1 w-100 text-center text-light" style="background-color: #00008b;" id="navbar-text">My Team</span>
             </nav>
         </header>
         <main>

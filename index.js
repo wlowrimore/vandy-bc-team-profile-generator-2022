@@ -176,20 +176,21 @@ const addEmployee = () => {
         (role === "Intern") {
         employee = new Intern(name, id, email, school);
         console.log(employee);
+    }
     
         teamArray.push(employee);
 
         if (confirmAddEmployee) {
           return addEmployee(teamArray);
 
-        } else { 
-          return teamArray;
-        }
+    } else { 
+        return teamArray;
     }
   })  
 }
-const writeFile = employeeCards => {
-  fs.writeFile('dist/index.html', employeeCards, err => {
+    
+const writeFile = data => {
+  fs.writeFile('dist/index.html', data, err => {
     if (err) {
       console.log(err);
       return;
