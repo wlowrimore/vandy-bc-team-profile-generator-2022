@@ -23,7 +23,7 @@ This application, when opened, will prompt user with a series of questions regar
 
   <video width="800" height="600" controls src="Images\video\Team-Profile-Generator.mp4" alt= "Walkthrough Video"></video>
 
-  <a href= "https://drive.google.com/file/d/1qWLMG9shlp4LDWsKBkGRIstR3M22nw3u/view" target= "_blank" rel= "noreferrer">See this video online</a>
+  <a href= "https://watch.screencastify.com/v/cgqdpbRGSo9eJE5wN380" target= "_blank" rel= "noreferrer">See this video online</a>
 
   <a href= "https://github.com/wlowrimore/vandy-bc-team-profile-generator-2022/tree/main" target= "_blank" rel= "noreferrer">See this project on Github</a>
 
