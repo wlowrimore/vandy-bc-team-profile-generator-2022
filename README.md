@@ -21,7 +21,11 @@ This application, when opened, will prompt user with a series of questions regar
   ### Usage:
   <img src= "Images\Site-Example.png" alt= "Website with completed cards">
 
-  <a href= "https://github.com/wlowrimore/vandy-bc-team-profile-generator-2022/tree/main" targe= "_blank" rel= "noreferrer">See this project on Github</a>
+  <video width="800" height="600" controls src="Images\video\Team-Profile-Generator.mp4" alt= "Walkthrough Video"></video>
+
+  <a href= "https://drive.google.com/file/d/1qWLMG9shlp4LDWsKBkGRIstR3M22nw3u/view" target= "_blank" rel= "noreferrer">See this video online</a>
+
+  <a href= "https://github.com/wlowrimore/vandy-bc-team-profile-generator-2022/tree/main" target= "_blank" rel= "noreferrer">See this project on Github</a>
 
   ### License:
   This project is licensed under:<br />
@@ -31,7 +35,7 @@ This application, when opened, will prompt user with a series of questions regar
   If you would like to contribute to this project, create a pull request and submit your ideas/contributions to the project page.  Your submission will be reviewed for consideration, and you will be contacted via email.
 
   ### Tests:
-  This application was tested by creating method tests for the Employee, Engineer, Intern, and Manager Classes.  These test were created to check the functionality of the methods used to fetch the information provided by the user (ie. getName(), getEmail, getID(), getRole(), etc.).  All tests we created to purposely fail so that they showed Classes were undefined.  Then when the Classes and their respective Constructors were created, all tests passed!  This ensured me that if I were to encounter any bugs when coding the app, I would be able to find and fix those bugs with ease.
+  This application was tested by creating method tests for the Employee, Engineer, Intern, and Manager Classes.  These test were created to check the functionality of the methods used to fetch the information provided by the user (ie. getName(), getEmail, getID(), getRole(), etc.).  All tests we created to purposely fail so that they showed Classes were undefined.  Then when the Classes and their respective Constructors were created, all tests passed!  This ensured me that if I were to encounter any bugs when coding the app, I would be able to find and fix those bugs with ease.  If you need to run the test, make sure you change the "script" so that "test" looks for "jest".
 
   ### Questions:
   If you have any questions or comments, please feel free to email me.<br />
