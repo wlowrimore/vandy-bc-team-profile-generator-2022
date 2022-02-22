@@ -1,16 +1,16 @@
 const generateManager = function (manager) {
     // create Manager card
     return `
-    <div class="col-4 mt-4">
+    <div class="row-4 mt-4">
         <div class="card h-100 card-shadow">
             <div class="card-header" style="background-color: #323d5a;">
                 <h3>${manager.name}</h3>
                 <h4>Manager</h4><i class="material-icons">supervisor_account</i>
             </div>
             <div class="card-body">
-                <p class="id">ID: ${manager.id}</p>
-                <p class="email">Email: <a href="mailto:${manager.email}">${manager.email}</a></p>
-                <p class="office">Office Number: ${manager.officeNumber}</p>
+                <p class="id"><b>ID:</b> ${manager.id}</p>
+                <p class="email"><b>Email:</b> <a href="mailto:${manager.email}">${manager.email}</a></p>
+                <p class="office"><b>Office Number:</b> ${manager.officeNumber}</p>
             </div>
         </div>
     </div>
@@ -20,16 +20,16 @@ const generateManager = function (manager) {
 // create Engineer card
 const generateEngineer = function (engineer) {
     return `
-    <div class="col-4 mt-4">
+    <div class="row-4 mt-4">
         <div class="card h-100 card-shadow">
             <div class="card-header" style= "background-color: #323d5a;">
                 <h3>${engineer.name}</h3>
                 <h4>Engineer</h4><i class="material-icons">laptop</i>
             </div>
             <div class="card-body">
-                <p class="id">ID: ${engineer.id}</p>
-                <p class="email">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></p>
-                <p class="github">Github: <a href="https://github.com/${engineer.github}" target= "_blank" rel= "noreferrer">www.github.com/${engineer.github}</a></p>
+                <p class="id"><b>ID:</b> ${engineer.id}</p>
+                <p class="email"><b>Email:</b> <a href="mailto:${engineer.email}">${engineer.email}</a></p>
+                <p class="github"><b>Github:</b> <a href="https://github.com/${engineer.github}" target= "_blank" rel= "noreferrer">www.github.com/${engineer.github}</a></p>
             </div>
         </div>
     </div>
@@ -39,16 +39,16 @@ const generateEngineer = function (engineer) {
 // create Intern card 
 const generateIntern = function (intern) {
     return `
-    <div class="col-4 mt-4">
+    <div class="row-4 mt-4">
         <div class="card h-100 card-shadow">
             <div class="card-header" style="background-color: #323d5a">
                 <h3>${intern.name}</h3>
                 <h4>Intern</h4><i class="material-icons">school</i>
             </div>
             <div class="card-body">
-                <p class="id">ID: ${intern.id}</p>
-                <p class="email">Email: <a href="mailto:${intern.email}">${intern.email}</a></p>
-                <p class="school">School: ${intern.school}</p>
+                <p class="id"><b>ID:</b> ${intern.id}</p>
+                <p class="email"><b>Email:</b> <a href="mailto:${intern.email}">${intern.email}</a></p>
+                <p class="school"><b>School:</b> ${intern.school}</p>
             </div>
         </div>
     </div>
@@ -133,5 +133,5 @@ const generateTeamPage = function (employeeCards) {
     `;
 }
 
-// export to index.js
+// Expot data to index.js for writing index.html
 module.exports = generateHTML;

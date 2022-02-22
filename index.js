@@ -1,16 +1,14 @@
-// Include packages needed for this application
 const generateHTML = require('./src/generateHTML');
-
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-
+// npm Pagkages
 const fs = require('fs');
 const inquirer = require('inquirer');
-
+// Array for created team members
 const teamArray = [];
 
-// Creates an array of questions for the Manager Input.
+// Questions / Answers Array for team Members
 const addManager = () => {
   return inquirer.prompt([
     {
@@ -161,9 +159,9 @@ const addEmployee = () => {
       name: 'confirmAddEmployee',
       message: "Would you like to add any other positions?",
       default: false
-    }  
-    
+    }
   ])
+  // Adds new Team Members
   .then(employeeData => {
     let {name, id, email, role, github, school, confirmAddEmployee} = employeeData;
     let employee;
@@ -188,7 +186,7 @@ const addEmployee = () => {
     }
   })  
 }
-    
+// writes index.html to /dist/ folder 
 const writeFile = data => {
   fs.writeFile('dist/index.html', data, err => {
     if (err) {
